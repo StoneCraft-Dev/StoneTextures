@@ -1,7 +1,7 @@
 package eu.playsc.stonetextures.network.packets;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -14,5 +14,5 @@ public interface StonePacket {
 
 	void handle(NetworkEvent.Context context);
 
-	void encode(FriendlyByteBuf buffer);
+	void encode(PacketBuffer buffer);
 }

@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "eu.playsc.stonetextures.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "stonetextures.refmap.json",
+  "mixins": [
+    "MixinResourcePackList"
+  ],
+  "client": [
+    "MixinClientModLoader"
+  ],
+  "minVersion": "0.8"
+}

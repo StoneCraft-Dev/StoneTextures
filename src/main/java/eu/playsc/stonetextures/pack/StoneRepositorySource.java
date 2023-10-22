@@ -1,25 +1,35 @@
 package eu.playsc.stonetextures.pack;
 
 import eu.playsc.stonetextures.StoneTextures;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
-import net.minecraft.server.packs.repository.Pack;
-import net.minecraft.server.packs.repository.PackSource;
-import net.minecraft.server.packs.repository.RepositorySource;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.resources.FolderPackFinder;
+import net.minecraft.resources.IPackNameDecorator;
+import net.minecraft.resources.IResourcePack;
+import net.minecraft.resources.ResourcePackInfo;
+import net.minecraft.resources.data.PackMetadataSection;
+import net.minecraft.util.text.StringTextComponent;
 
+import java.io.File;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-public class StoneRepositorySource implements RepositorySource {
+public class StoneRepositorySource extends FolderPackFinder {
+	public StoneRepositorySource() {
+		super(new File("placeholder"), IPackNameDecorator.DEFAULT);
+	}
+
 	@Override
-	public void loadPacks(@NotNull final Consumer<Pack> consumer, final Pack.@NotNull PackConstructor constructor) {
-		final PackMetadataSection meta = new PackMetadataSection(new TextComponent(PackHandler.PACK_NAME), PackHandler.PACK_FORMAT);
-		final Pack pack = PackHandler.createPack(PackHandler.PACK_NAME, meta, true, StoneResourcePack::new, constructor, Pack.Position.TOP, PackSource.DEFAULT);
+	public void loadPacks(final Consumer<ResourcePackInfo> consumer, final ResourcePackInfo.IFactory constructor) {
+		final PackMetadataSection meta = new PackMetadataSection(new StringTextComponent(PackHandler.PACK_NAME), PackHandler.PACK_FORMAT);
+		final ResourcePackInfo pack = PackHandler.createPack(PackHandler.PACK_NAME, meta, true, getSupplier(), constructor, ResourcePackInfo.Priority.TOP, IPackNameDecorator.DEFAULT);
 		if (pack != null) {
 			consumer.accept(pack);
 			StoneTextures.resourcesInstalled = true;
 		} else {
 			StoneTextures.LOGGER.error("Failed to create pack: " + PackHandler.resourcesDirectory.getAbsolutePath());
 		}
+	}
+
+	private Supplier<IResourcePack> getSupplier() {
+		return StoneResourcePack::new;
 	}
 }

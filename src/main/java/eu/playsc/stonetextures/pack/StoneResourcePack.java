@@ -1,15 +1,14 @@
 package eu.playsc.stonetextures.pack;
 
-import net.minecraft.server.packs.FolderPackResources;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.resources.FolderPack;
 
-public class StoneResourcePack extends FolderPackResources {
+public class StoneResourcePack extends FolderPack {
 	public StoneResourcePack() {
 		super(PackHandler.resourcesDirectory);
 	}
 
 	@Override
-	public @NotNull String getName() {
+	public String getName() {
 		return PackHandler.PACK_NAME;
 	}
 

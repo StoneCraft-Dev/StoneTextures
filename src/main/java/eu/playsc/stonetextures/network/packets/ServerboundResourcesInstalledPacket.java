@@ -1,14 +1,11 @@
 package eu.playsc.stonetextures.network.packets;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.network.NetworkEvent;
 
-import java.util.UUID;
-
-public record ServerboundResourcesInstalledPacket(UUID uuid) implements StonePacket {
-
-	public static ServerboundResourcesInstalledPacket decode(final FriendlyByteBuf buffer) {
-		return new ServerboundResourcesInstalledPacket(buffer.readUUID());
+public final class ServerboundResourcesInstalledPacket implements StonePacket {
+	public static ServerboundResourcesInstalledPacket decode(final PacketBuffer packetBuffer) {
+		return new ServerboundResourcesInstalledPacket();
 	}
 
 	@Override
@@ -17,7 +14,6 @@ public record ServerboundResourcesInstalledPacket(UUID uuid) implements StonePac
 	}
 
 	@Override
-	public void encode(final FriendlyByteBuf buffer) {
-		buffer.writeUUID(this.uuid);
+	public void encode(final PacketBuffer buffer) {
 	}
 }

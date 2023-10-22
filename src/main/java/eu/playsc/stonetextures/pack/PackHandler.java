@@ -3,11 +3,10 @@ package eu.playsc.stonetextures.pack;
 import eu.playsc.stonetextures.StoneTextures;
 import net.lingala.zip4j.ZipFile;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.server.packs.PackResources;
-import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
-import net.minecraft.server.packs.repository.Pack;
-import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.resources.IPackNameDecorator;
+import net.minecraft.resources.IResourcePack;
+import net.minecraft.resources.ResourcePackInfo;
+import net.minecraft.resources.data.PackMetadataSection;
 
 import java.io.File;
 import java.io.InputStream;
@@ -45,13 +44,13 @@ public class PackHandler {
 		}
 	}
 
-	public static Pack createPack(final String name, final PackMetadataSection meta, final boolean forceEnablePack, final Supplier<PackResources> packSupplier, final Pack.PackConstructor constructor, final Pack.Position position, final PackSource source) {
+	public static ResourcePackInfo createPack(final String name, final PackMetadataSection meta, final boolean forceEnablePack, final Supplier<IResourcePack> packSupplier, final ResourcePackInfo.IFactory constructor, final ResourcePackInfo.Priority position, final IPackNameDecorator source) {
 		try {
-			final PackResources res = packSupplier.get();
-			final Pack pack;
+			final IResourcePack res = packSupplier.get();
+			final ResourcePackInfo pack;
 
 			try {
-				pack = constructor.create(name, new TextComponent(res.getName()), forceEnablePack, packSupplier, meta, position, source, res.isHidden());
+				pack = constructor.create(name, forceEnablePack, packSupplier, res, meta, position, source);
 			} catch (final Exception e) {
 				res.close();
 				throw e;
