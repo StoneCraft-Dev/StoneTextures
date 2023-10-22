@@ -17,6 +17,7 @@ public class StoneRepositorySource implements RepositorySource {
 		final Pack pack = PackHandler.createPack(PackHandler.PACK_NAME, meta, true, StoneResourcePack::new, constructor, Pack.Position.TOP, PackSource.DEFAULT);
 		if (pack != null) {
 			consumer.accept(pack);
+			StoneTextures.resourcesInstalled = true;
 		} else {
 			StoneTextures.LOGGER.error("Failed to create pack: " + PackHandler.resourcesDirectory.getAbsolutePath());
 		}
