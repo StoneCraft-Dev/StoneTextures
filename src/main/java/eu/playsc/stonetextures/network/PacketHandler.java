@@ -16,7 +16,7 @@ public class PacketHandler {
 			.named(new ResourceLocation("stonecraft:network"))
 			.clientAcceptedVersions(s -> true)
 			.serverAcceptedVersions(s -> true)
-			.networkProtocolVersion(() -> "1.18")
+			.networkProtocolVersion(() -> "1.19")
 			.simpleChannel();
 	private static int index;
 

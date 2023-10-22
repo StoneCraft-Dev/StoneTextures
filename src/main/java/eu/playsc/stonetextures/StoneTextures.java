@@ -35,8 +35,8 @@ public class StoneTextures {
 	}
 
 	@SubscribeEvent
-	public void onPlayerJoinServer(final ClientPlayerNetworkEvent.LoggedInEvent event) {
-		if (event.getConnection() == null || event.getPlayer() == null || !resourcesInstalled) {
+	public void onPlayerJoinServer(final ClientPlayerNetworkEvent.LoggingIn event) {
+		if (!event.getConnection().isConnected() || !resourcesInstalled) {
 			return;
 		}
 

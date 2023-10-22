@@ -3,7 +3,7 @@ package eu.playsc.stonetextures.pack;
 import eu.playsc.stonetextures.StoneTextures;
 import net.lingala.zip4j.ZipFile;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.server.packs.repository.Pack;
@@ -51,7 +51,7 @@ public class PackHandler {
 			final Pack pack;
 
 			try {
-				pack = constructor.create(name, new TextComponent(res.getName()), forceEnablePack, packSupplier, meta, position, source, res.isHidden());
+				pack = constructor.create(name, Component.literal(res.getName()), forceEnablePack, packSupplier, meta, position, source, res.isHidden());
 			} catch (final Exception e) {
 				res.close();
 				throw e;
