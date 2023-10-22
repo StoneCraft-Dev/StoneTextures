@@ -40,6 +40,6 @@ public class StoneTextures {
 			return;
 		}
 
-		PacketHandler.sendToServer(new ServerboundResourcesInstalledPacket(event.getPlayer().getUUID()));
+		PacketHandler.sendToServer(new ServerboundResourcesInstalledPacket());
 	}
 }

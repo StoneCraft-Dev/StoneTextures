@@ -12,7 +12,7 @@ plugins {
 }
 
 group = 'eu.playsc'
-version = '1.0'
+version = '1.18'
 
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(17)
